@@ -22,6 +22,12 @@ Fetches cryptocurrency price data from an external API and automatically sends p
 
 Flow:
 Schedule Trigger → HTTP Request → Data Processing (JavaScript) → Telegram Alert
+4. Lead Notification Automation
+
+Webhook → JavaScript → Telegram
+
+Description:
+This workflow receives lead data through a webhook, processes the information using JavaScript, and sends an instant notification through a Telegram bot. This can be used by marketing teams to get real-time alerts whenever a new lead is generated.
 
 ## Tech Stack
 
