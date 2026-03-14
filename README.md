@@ -1,37 +1,66 @@
 # n8n Automation Workflows Portfolio
 
-This repository contains automation workflows built using n8n involving API integrations, scheduled triggers, and Telegram bot notifications.
+This repository contains automation workflows built using **n8n** demonstrating API integrations, scheduled automations, webhook triggers, and Telegram bot notifications.
+
+These workflows simulate real-world automation use cases such as monitoring APIs, sending alerts, and capturing leads.
+
+---
 
 ## 1. API → Telegram Alert
 
-Workflow that fetches external API data and sends automated alerts via Telegram bot.
+Fetches data from an external API and sends automated alerts via a Telegram bot.
 
-Flow:
+**Workflow:**
+
 Schedule Trigger → HTTP Request → JavaScript → Telegram
+
+**Use Case:**
+Monitor API responses and notify users instantly.
+
+---
 
 ## 2. Website Monitor Automation
 
-Checks a website periodically and sends updates through Telegram.
+Periodically checks website content and sends updates through Telegram.
 
-Flow:
+**Workflow:**
+
 Schedule Trigger → HTTP Request → JavaScript Processing → Telegram Notification
+
+**Use Case:**
+Monitor website changes or content updates.
+
+---
 
 ## 3. Bitcoin Price Alert Bot
 
-Fetches cryptocurrency price data from an external API and automatically sends price updates via Telegram bot.
+Fetches cryptocurrency price data from an external API and sends automatic price alerts.
 
-Flow:
+**Workflow:**
+
 Schedule Trigger → HTTP Request → Data Processing (JavaScript) → Telegram Alert
-4. Lead Notification Automation
+
+**Use Case:**
+Track cryptocurrency prices and receive automated updates.
+
+---
+
+## 4. Lead Notification Automation
+
+Receives lead data through a webhook and sends instant alerts via Telegram.
+
+**Workflow:**
 
 Webhook → JavaScript → Telegram
 
-Description:
-This workflow receives lead data through a webhook, processes the information using JavaScript, and sends an instant notification through a Telegram bot. This can be used by marketing teams to get real-time alerts whenever a new lead is generated.
+**Use Case:**
+Capture leads from forms or APIs and notify marketing teams in real time.
+
+---
 
 ## Tech Stack
 
-* n8n
+* n8n (Workflow Automation)
 * JavaScript
 * HTTP APIs
 * Telegram Bot API
