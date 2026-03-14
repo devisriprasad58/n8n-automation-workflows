@@ -1,33 +1,31 @@
-# API Alert Automation using n8n
+# n8n Automation Workflows Portfolio
 
-## Overview
+This repository contains automation workflows built using n8n involving API integrations, scheduled triggers, and Telegram bot notifications.
 
-Built an automation workflow using n8n that fetches external API data, processes it using JavaScript, and delivers real-time alerts through a Telegram bot.
+## 1. API → Telegram Alert
 
-## Workflow Architecture
+Workflow that fetches external API data and sends automated alerts via Telegram bot.
 
-HTTP Request → Code (JavaScript) → Telegram Bot
+Flow:
+Schedule Trigger → HTTP Request → JavaScript → Telegram
 
-## Features
+## 2. Website Monitor Automation
 
-* Scheduled automation execution
-* Fetches live API data
-* Data transformation using custom JavaScript
-* Automated Telegram alert delivery
+Checks a website periodically and sends updates through Telegram.
 
-## Technologies
+Flow:
+Schedule Trigger → HTTP Request → JavaScript Processing → Telegram Notification
 
-* n8n (workflow automation)
-* JavaScript (Code Node)
+## 3. Bitcoin Price Alert Bot
+
+Fetches cryptocurrency price data from an external API and automatically sends price updates via Telegram bot.
+
+Flow:
+Schedule Trigger → HTTP Request → Data Processing (JavaScript) → Telegram Alert
+
+## Tech Stack
+
+* n8n
+* JavaScript
+* HTTP APIs
 * Telegram Bot API
-* HTTP API integration
-
-## Output Verification
-
-* Telegram message successfully delivered
-* message_id confirmed
-* chat_id validated
-
-## Use Case
-
-This automation can be used for monitoring APIs, sending system alerts, or notifying users about real-time updates.
