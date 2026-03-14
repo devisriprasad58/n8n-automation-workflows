@@ -1,0 +1,123 @@
+{
+  "name": "ai news alert bot",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "hours",
+              "triggerAtMinute": 59
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.3,
+      "position": [
+        0,
+        0
+      ],
+      "id": "f43b9110-a1e0-47ab-88c2-4ea958e2bfae",
+      "name": "Schedule Trigger"
+    },
+    {
+      "parameters": {
+        "url": "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        208,
+        0
+      ],
+      "id": "6d37113e-a255-4c44-ab14-8fc446ebfb87",
+      "name": "HTTP Request"
+    },
+    {
+      "parameters": {
+        "jsCode": "const price = $input.first().json.bitcoin.usd;\n\nreturn [\n  {\n    json: {\n      message: \"Bitcoin price: $\" + price\n    }\n  }\n];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        416,
+        0
+      ],
+      "id": "276ca01e-a9c7-4a44-9ee6-248cfcc5477d",
+      "name": "Code in JavaScript"
+    },
+    {
+      "parameters": {
+        "chatId": "1420379409",
+        "text": "={{$json.message}}",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        624,
+        0
+      ],
+      "id": "9369119b-7c17-4e17-9b1a-ac5f06884b97",
+      "name": "Send a text message",
+      "webhookId": "31fc1180-6e10-44a4-906d-998ac420bb4c",
+      "credentials": {
+        "telegramApi": {
+          "id": "mfug7kO3zjOfPsf4",
+          "name": "Telegram account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript": {
+      "main": [
+        [
+          {
+            "node": "Send a text message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "versionId": "30b8ab25-f966-4023-8d4e-03e6fa82ccaa",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "e1940b1c27861d4f180358e75e87f45598dde4d2f1c3cc99e44d1b7b00580c2c"
+  },
+  "id": "dq9CVUvSP2gYiY1Q",
+  "tags": []
+}
