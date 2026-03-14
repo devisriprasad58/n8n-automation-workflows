@@ -1,0 +1,138 @@
+{
+  "name": "My workflow",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "64d58133-1b1c-4e06-b241-9fd86a976116",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "url": "https://httpbin.org/json",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        208,
+        0
+      ],
+      "id": "8bf14246-eb4c-4382-b326-396135ccd59b",
+      "name": "HTTP Request"
+    },
+    {
+      "parameters": {
+        "jsCode": "const today = new Date().toLocaleDateString('en-IN', {\n  weekday: 'long', day: 'numeric', month: 'long'\n});\n\nreturn [{\n  json: {\n    message: `🤖 *n8n Job Alert Bot — ${today}*\\n\\nHey Devi\\\\! Your n8n automation is LIVE\\\\! 🎉\\n\\n🔥 *Fresh Fresher IT Jobs Today:*\\n\\n🔵 [LinkedIn Jobs](https://www.linkedin.com/jobs/search/?keywords=fresher+software+developer&location=Hyderabad&f_TPR=r86400)\\n🟠 [Naukri Freshers](https://www.naukri.com/fresher-software-developer-jobs)\\n🟢 [Internshala Jobs](https://internshala.com/fresher-jobs/software-development-jobs/)\\n🔴 [Indeed India](https://in.indeed.com/jobs?q=fresher+software+developer&sort=date)\\n\\n⚡ _Apply fast — first 24 hours = highest response rate\\\\!_\\n\\n🤖 _Powered by n8n automation_`\n  }\n}];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        416,
+        0
+      ],
+      "id": "79435df8-1389-4598-8bc3-995647476dab",
+      "name": "Code in JavaScript"
+    },
+    {
+      "parameters": {
+        "chatId": "1420379409",
+        "text": "n8n is LIVE! Hey Devi, your first workflow works! 🎉🚀",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        368,
+        0
+      ],
+      "id": "fb5f6ba7-79a3-4c61-ba3b-42c2c715f607",
+      "name": "Send a text message",
+      "webhookId": "bf4a7b5c-0ef0-44de-8ab8-883c06d78bd2",
+      "credentials": {
+        "telegramApi": {
+          "id": "mfug7kO3zjOfPsf4",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "hours",
+              "triggerAtMinute": 5
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.3,
+      "position": [
+        144,
+        144
+      ],
+      "id": "82e45080-69c6-466f-b0e9-250290ef7f8f",
+      "name": "Schedule Trigger"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript": {
+      "main": [
+        [
+          {
+            "node": "Send a text message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false,
+    "timeSavedMode": "fixed",
+    "timezone": "Indian/Christmas",
+    "callerPolicy": "workflowsFromSameOwner",
+    "executionTimeout": -1
+  },
+  "versionId": "6e5900d6-1eca-4b92-9a78-68f780c0f3ea",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "e1940b1c27861d4f180358e75e87f45598dde4d2f1c3cc99e44d1b7b00580c2c"
+  },
+  "id": "orQg1BdWnwWyM4u3",
+  "tags": []
+}
