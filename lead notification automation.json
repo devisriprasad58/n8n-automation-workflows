@@ -1,0 +1,94 @@
+{
+  "name": "lead notification automation",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "new-lead",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "27f2276d-d408-43ed-a3e1-4b7ff9c8dd6a",
+      "name": "Webhook",
+      "webhookId": "2e9da070-4239-4b21-92b8-e8afe352dcc9"
+    },
+    {
+      "parameters": {
+        "jsCode": "const lead = $input.first().json.body;\n\nreturn [\n{\njson:{\nmessage:`New Lead 🚀\n\nName: ${lead.name}\nEmail: ${lead.email}\nService: ${lead.service}`\n}\n}\n];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        208,
+        0
+      ],
+      "id": "e282ac68-3514-4e81-aaea-bdbd01af0b35",
+      "name": "Code in JavaScript"
+    },
+    {
+      "parameters": {
+        "chatId": "1420379409",
+        "text": "={{$json.message}}",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        416,
+        0
+      ],
+      "id": "a800c98a-0e08-45fa-830f-4ee862f2a7cf",
+      "name": "Send a text message",
+      "webhookId": "aeca1784-6583-41f0-9c61-0747e49928c7",
+      "credentials": {
+        "telegramApi": {
+          "id": "mfug7kO3zjOfPsf4",
+          "name": "Telegram account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript": {
+      "main": [
+        [
+          {
+            "node": "Send a text message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "versionId": "438a3209-41a6-4e08-a2ac-fda6df0fe57a",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "e1940b1c27861d4f180358e75e87f45598dde4d2f1c3cc99e44d1b7b00580c2c"
+  },
+  "id": "uYO60a8FjHcvwASu",
+  "tags": []
+}
